@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  influxdb:
+    build: influxdb
+    ports:
+      - '8086:8086'
+      - '2003:2003'
+    volumes:
+      - influxdb_data:/var/lib/influxdb
+  grafana:
+    build: grafana
+    links:
+      - influxdb
+    ports:
+      - '3000:3000'
+
+volumes:
+  grafana_data: {}
+  influxdb_data: {}
